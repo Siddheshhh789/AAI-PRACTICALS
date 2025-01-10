@@ -1,0 +1,28 @@
+from ultralytics import YOLO
+import cv2
+
+# Step 1: Load the YOLO model (ensure that the model path is correct)
+model = YOLO("C:/Users/Desktop/Yolo-Weights/yolov8n.pt")
+
+# Step 2: Process the image using the YOLO model
+results = model("C:/Users/Desktop/p5/imgs/1.jpg")
+
+# Step 3: Access the first result (it contains detected objects and image)
+# results[0].plot() automatically draws bounding boxes on the image
+image = results[0].plot()
+
+# Step 4: Resize the image for better display (optional)
+resized_image = cv2.resize(image, (800, 800))  # Adjust (800, 800) to your preferred size
+
+# Step 5: Create the OpenCV window with normal resizing option
+cv2.namedWindow("Processed Image", cv2.WINDOW_NORMAL)
+
+# Step 6: Resize the window to match the size of the image
+cv2.resizeWindow("Processed Image", resized_image.shape[1], resized_image.shape[0])
+
+# Step 7: Display the resized image in the window
+cv2.imshow("Processed Image", resized_image)
+
+# Step 8: Wait for a key press and close the window
+cv2.waitKey(0)
+cv2.destroyAllWindows()
